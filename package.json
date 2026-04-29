@@ -1,0 +1,16 @@
+{
+  "name": "smart-insurance-reminder-system",
+  "version": "1.0.0",
+  "description": "Smart Insurance Lead & Renewal Reminder System",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "seed": "cd backend && npm run seed"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
