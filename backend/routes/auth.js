@@ -13,15 +13,20 @@ function signToken(id) {
 
 // POST /api/auth/login
 router.post('/login', [
-  body('email').isEmail().normalizeEmail(),
   body('password').notEmpty(),
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { emailOrPhone, email, password } = req.body;
+    const identifier = emailOrPhone || email; // Handle both variable names
+
+    console.log(`🔑 Login attempt for: ${identifier}`);
+
+    const user = await User.findOne({ 
+      $or: [{ email: identifier }, { phone: identifier }] 
+    });
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
