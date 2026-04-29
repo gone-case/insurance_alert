@@ -1,5 +1,5 @@
 services:
-  # ── Backend API ──────────────────────────────────────────────────────────────
+  # ── Bheema Backend (API) ─────────────────────────────────────────────────────
   - type: web
     name: bheema-api
     runtime: node
@@ -7,6 +7,7 @@ services:
     buildCommand: npm install
     startCommand: npm start
     plan: free
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
@@ -31,9 +32,9 @@ services:
       - key: EMAIL_PASS
         sync: false
       - key: CLIENT_URL
-        sync: false   # Set to your frontend URL
+        sync: false   # Set this to https://bheema-app.onrender.com
 
-  # ── Frontend Static Site ─────────────────────────────────────────────────────
+  # ── Bheema Frontend (App) ───────────────────────────────────────────────────
   - type: web
     name: bheema-app
     runtime: static
@@ -42,7 +43,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false   # Set to https://bheema-api.onrender.com/api
+        value: https://bheema-api.onrender.com/api
     routes:
       - type: rewrite
         source: /*
