@@ -1,7 +1,7 @@
 services:
   # ── Backend API ──────────────────────────────────────────────────────────────
   - type: web
-    name: smart-insurance-api
+    name: bheema-api
     runtime: node
     rootDir: backend
     buildCommand: npm install
@@ -35,14 +35,14 @@ services:
 
   # ── Frontend Static Site ─────────────────────────────────────────────────────
   - type: web
-    name: smart-insurance-app
+    name: bheema-app
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        sync: false   # Set to https://smart-insurance-api.onrender.com/api
+        sync: false   # Set to https://bheema-api.onrender.com/api
     routes:
       - type: rewrite
         source: /*
